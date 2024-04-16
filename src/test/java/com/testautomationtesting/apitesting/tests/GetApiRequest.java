@@ -13,7 +13,12 @@ public class GetApiRequest {
                 .contentType(ContentType.JSON)
                 .baseUri("https://restful-booker.herokuapp.com/booking")
                 .when()
-                .get();
+                .get()
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .statusLine("HTTP/1.1 200 OK");
+
     }
 
 }
