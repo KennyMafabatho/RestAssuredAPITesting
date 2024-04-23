@@ -3,8 +3,9 @@ package com.testautomationtesting.apitesting.tests;
 import com.testautomation.apitesting.utils.BaseTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import net.minidev.json.JSONObject;
-import org.checkerframework.checker.units.qual.C;
+//import org.checkerframework.checker.units.qual.C;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
@@ -28,6 +29,7 @@ public class PostAPIRequest extends BaseTest {
         bookingDates.put("checkout","2023-03-30");
 
 
+        Response response =
         RestAssured
                 .given()
                     .contentType(ContentType.JSON)
@@ -40,10 +42,26 @@ public class PostAPIRequest extends BaseTest {
                     .assertThat()
                 //.log().ifValidationFails()
                     .statusCode(200)
-                .body("booking.firstname", Matchers.equalTo("api testin"))
+                .body("booking.firstname", Matchers.equalTo("api testing"))
                 .body("booking.totalprice", Matchers.equalTo(1000))
-                .body("booking.bookingdates.checkin", Matchers.equalTo("2023-03-26"));
+                .body("booking.bookingdates.checkin", Matchers.equalTo("2023-03-26"))
+                .extract()
+                .response();
 
+        int bookingId = response.path("bookingid");
+
+        //passing booking ID to the parameter
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .pathParam("bookingID",bookingId)
+                .baseUri("https://restful-booker.herokuapp.com/booking")
+                .when()
+                .get("{bookingID}")
+                .then()
+                .assertThat()
+                .statusCode(200);
 
     }
 }
