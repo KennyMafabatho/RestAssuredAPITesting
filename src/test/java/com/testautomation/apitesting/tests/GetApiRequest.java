@@ -1,4 +1,4 @@
-package com.testautomationtesting.apitesting.tests;
+package com.testautomation.apitesting.tests;
 
 import com.github.dockerjava.transport.DockerHttpClient;
 import io.restassured.RestAssured;
