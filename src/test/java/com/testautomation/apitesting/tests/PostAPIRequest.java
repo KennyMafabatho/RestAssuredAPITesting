@@ -50,6 +50,7 @@ public class PostAPIRequest extends BaseTest {
 
         int bookingId = response.path("bookingid");
 
+
         //passing booking ID to the parameter
 
         RestAssured
