@@ -1,6 +1,6 @@
   {
 
-        "firstname": "api testing}}",
+        "firstname": "api testing",
         "lastname": "tutorial",
         "totalprice": 1000,
         "depositpaid": true,
